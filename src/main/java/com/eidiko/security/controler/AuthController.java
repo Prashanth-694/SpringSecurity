@@ -125,7 +125,7 @@ public class AuthController {
 		} catch (Exception e) {
 			log.info("Credentials Invalid !!");
 			
-			return false;
+			throw new InvalidCredentialsException();
 		}
 
 	}
