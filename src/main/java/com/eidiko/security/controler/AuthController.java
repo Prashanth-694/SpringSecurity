@@ -28,6 +28,7 @@ import com.eidiko.security.service.RefreshTokenService;
 import com.eidiko.security.service.UserServiceSecurity;
 import com.eidiko.security.util.JwtHelper;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -92,7 +93,7 @@ public class AuthController {
 	}
 
 	@PostMapping("/v1/register")
-	public ResponseEntity<Users> insertUser(@RequestBody Users users) {
+	public ResponseEntity<Users> insertUser(@Valid @RequestBody Users users) {
 		log.info("inside insertUser()");
 		users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
 		Users user = userServiceSecurity.insertUser(users);

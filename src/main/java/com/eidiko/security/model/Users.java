@@ -17,6 +17,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,10 +34,22 @@ import lombok.ToString;
 //@ToString
 @Entity
 public class Users implements UserDetails {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	private int id;
+	
+	@Email(message = "Email must have follow the pattern eg. abc@gmail.com")
 	private String email;
+	
+	@NotEmpty(message = "password must not be null nor empty")
+	@Size(min = 4,  message = "password length shuould be between 4 and 10.")
 	private String password;
+	
+	@NotNull(message = "role must not be null.")
 	private String role;
 
 	@OneToOne(mappedBy = "users")//,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
